@@ -34,8 +34,6 @@ def print_opening_page():
                        |___/""")
     print("You have " + str(guesses_left) + " strikes")
 
-    return None
-
 
 HANGMAN_PHOTOS = {
     'picture 1':
@@ -114,8 +112,6 @@ def print_hangman(num_of_tries):
         print(HANGMAN_PHOTOS['picture 6'])
     if num_of_tries == 7:
         print(HANGMAN_PHOTOS['picture 7'])
-
-    return None
 
 
 print("Welcome to Hangman!")
