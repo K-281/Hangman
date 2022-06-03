@@ -23,7 +23,7 @@ def print_opening_page():
     :rtype:
     """
 
-    print("""
+    print(r"""
     _    _                                         
    | |  | |                                        
    | |__| | __ _ _ __   __ _ _ __ ___   __ _ _ __  
