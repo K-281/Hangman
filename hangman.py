@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time : 15/05/2022 14:56
 # @Author : Karim
-# @Site : 
+# @Site :
 # @File : hangman.py
 # @Software: IntelliJ IDEA
 
@@ -37,49 +37,37 @@ def print_opening_page():
 
 HANGMAN_PHOTOS = {
     'picture 1':
-        """    x-------x"""
-
-    , 'picture 2':
+        """    x-------x""", 'picture 2':
         """    x-------x
            |
            |
            |
            |
-           |"""
-
-    , 'picture 3':
+           |""", 'picture 3':
         """    x-------x
            |       |
            |       0
            |
            |
-           |"""
-
-    , 'picture 4':
+           |""", 'picture 4':
         """    x-------x
            |       |
            |       0
            |       |
            |
-           |"""
-
-    , 'picture 5':
+           |""", 'picture 5':
         """    x-------x
            |       |
            |       0
            |      /|\\
            |
-           |"""
-
-    , 'picture 6':
+           |""", 'picture 6':
         """    x-------x
            |       |
            |       0
            |      /|\\
            |      /
-           |"""
-
-    , 'picture 7':
+           |""", 'picture 7':
         """    x-------x
            |       |
            |       0
@@ -123,7 +111,10 @@ intro = input("Press enter to begin.")
 
 
 def select_word():
-    words = ["python", "java", "kotlin", "javascript", "swift", "ruby", "typescript", "haskell"]
+    f = open("words.txt", encoding="utf8")
+    words = f.readlines()
+    f.close()
+    words = [word.strip() for word in words]
     return random.choice(words)
 
 
@@ -162,11 +153,10 @@ def main():
     word = select_word()
     letters_guessed = []
     guesses_left = 6
-    print("The word is " + str(len(word)) + " letters long.")
-    print("You have " + str(guesses_left) + " guesses left.")
+    print_opening_page()
     while guesses_left > 0:
-        display = display_word(word, letters_guessed)
-        print(display)
+        print("The word now looks like this: " +
+              display_word(word, letters_guessed))
         guess = get_guess()
         if guess in letters_guessed:
             print("You already guessed that letter.")
@@ -176,13 +166,13 @@ def main():
             print("That letter is not in the word.")
             guesses_left -= 1
             print_hangman(guesses_left)
-        if "_" not in display:
+        if display_word(word, letters_guessed) == word:
             print("You win!")
             break
-        if guesses_left == 0:
-            print("You lose!")
-            print("The word was " + word)
-    play_again()
+    if guesses_left == 0:
+        print("You lose! The word was: " + word)
+    if play_again():
+        main()
 
 
 if __name__ == '__main__':
